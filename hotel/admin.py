@@ -1,8 +1,8 @@
 from django.contrib import admin
 from  hotel.models import Hotel, Booking, ActivityLog, StaffOnDuty, Room, RoomType, HotelFaqs, HotelFeatures, HotelGallery
 
-# Allow gallery for hotels
-class HotelGalleryInline(admin, TabularInline):
+# Allow gallery inline tab for hotels
+class HotelGalleryInline(admin.TabularInline):
     model = HotelGallery
      
 

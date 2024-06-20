@@ -5,6 +5,7 @@ import shortuuid
 from userauths.models import User
 from shortuuid.django_fields import ShortUUIDField
 from django_ckeditor_5.fields import CKEditor5Field
+from taggit.managers import TaggableManager
 
 # Choices for hotel status
 HOTEL_STATUS = (
@@ -42,6 +43,7 @@ PAYMENT_STATUS = (
 
 # Hotel model definition
 class Hotel(models.Model):
+    # Basic details
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True) #the hotel lister
     name = models.CharField(max_length=255)
     description = CKEditor5Field(null=True, blank=True, config_name='extends')
@@ -51,12 +53,20 @@ class Hotel(models.Model):
     email = models.EmailField()
     status = models.CharField(max_length=20, choices=HOTEL_STATUS, default="Live")
 
-    tags = models.CharField(max_length=200, help_text="Separate tags with comma")
+    tags = TaggableManager(blank=True)
     views = models.IntegerField(default=0)
     featured = models.BooleanField(default=False)
     hotelID = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvwxyz")
     slug = models.SlugField(unique=True)
     date = models.DateTimeField(auto_now_add=True)
+
+    # Socials
+    website = models.CharField(max_length=2048, null=True, blank=True)
+    facebook = models.CharField(max_length=2048, null=True, blank=True)
+    twitter = models.CharField(max_length=2048, null=True, blank=True)
+    instagram = models.CharField(max_length=2048, null=True, blank=True)
+    youtube = models.CharField(max_length=2048, null=True, blank=True)
+
 
     def __str__(self):
         return  self.name 
@@ -80,8 +90,12 @@ class Hotel(models.Model):
     # Display name for the thumbnail in the admin panel
     thumbnail.short_description = 'Thumbnail'  
 
+    
     def hotel_gallery(self):
         return HotelGallery.objects.filter(hotel=self)
+    
+    def hotel_room_types(self):
+        return RoomType.objects.filter(hotel=self)
 
 # Connect Hotel & gallery together
 class HotelGallery(models.Model):
@@ -160,7 +174,7 @@ class Room(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.type} - {self.hotel.name} - {self.price}"
+        return f"{self.room_type.type} - {self.hotel.name}"
     
     class Meta:
         verbose_name_plural = "Rooms"
