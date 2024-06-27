@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-
 from userauths.models import User
 
 class UserRegisterForm(UserCreationForm):
@@ -13,7 +12,7 @@ class UserRegisterForm(UserCreationForm):
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Create Password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
     
-    
+    # Specify the model and fields to include in the form
     class Meta:
         model = User
         fields = ['full_name', 'username', 'email', 'phone', 'password1', 'password2']

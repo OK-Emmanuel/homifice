@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from shortuuid.django_fields import ShortUUIDField
 
 
-# Create dynamic image paths for each user
+# Function to create dynamic image paths for each user
 def user_directory_path(instance, filename):
     ext = filename.split(".")[-1]
     filename = "%s.%s" % (instance.user.id, filename)
@@ -26,22 +26,21 @@ IDENTITY_TYPE = (
 
 
 # Custom User model inheriting from AbstractUser
-
 class User(AbstractUser):
     full_name = models.CharField(max_length=500, null=True, blank=True)
     username = models.CharField(max_length=500, unique=True)
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=20, null=True, blank=True) #for country prefix
+    phone = models.CharField(max_length=20, null=True, blank=True)  # For country prefix
     gender = models.CharField(max_length=20, choices=GENDER, default="Other")
 
     otp = models.CharField(max_length=100, null=True, blank=True)
 
-    USERNAME_FIELD = 'email' # use email as the unique identifier for login
-    REQUIRED_FIELDS = ['username'] # required
+    USERNAME_FIELD = 'email'  # Use email as the unique identifier for login
+    REQUIRED_FIELDS = ['username']  # Required fields for user creation
 
+    def __str__(self):
+        return self.username
 
-def __str__(self):
-    return self.username
 
 # Profile model linked to User via OneToOneField
 class Profile(models.Model):
@@ -49,7 +48,7 @@ class Profile(models.Model):
     image = models.FileField(upload_to=user_directory_path, default="default.jpg", null=True, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=500, null=True, blank=True)
-    phone = models.CharField(max_length=20, null=True, blank=True) #for country prefix
+    phone = models.CharField(max_length=20, null=True, blank=True)  # For country prefix
     gender = models.CharField(max_length=20, choices=GENDER, default="Other")
     country = models.CharField(max_length=100, null=True, blank=True)
     city = models.CharField(max_length=100, null=True, blank=True)
@@ -75,10 +74,11 @@ class Profile(models.Model):
     
     def __str__(self):
         if self.full_name:
-            return f"{self.full_name}" # return full name if available
+            return f"{self.full_name}"  # Return full name if available
         else:
-            return f"{self.user.username}" # otherwise use username
-        
+            return f"{self.user.username}"  # Otherwise, use username
+
+
 # Signal handlers to create and save Profile objects upon User creation
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

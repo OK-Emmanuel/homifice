@@ -1,6 +1,6 @@
 {% extends 'partials/base.html' %}
 {% load static %}
-{%block content%}
+{% block content%}
 
 <div id="titlebar" class="gradient">
     <div class="container">
@@ -21,28 +21,17 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 utf_listing_payment_section">
             <div class="utf_booking_listing_section_form margin-bottom-40">
-                <h3><i class="sl sl-icon-paper-plane"></i> Billing Information</h3>
+                <h3><i class="fa fa-bed"></i> Selected Rooms </h3>
                 <div class="row">
+                    {% for id, item in data.items %}
                     <div class="col-md-6">
-                        <label>First Name</label>
-                        <input type="text" value="" placeholder="First Name">
+                       <h4>{{item.room_name}}</h4>
+                       <p>Beds: {{item.number_of_beds}}</p>
+                       <span>Price: {{item.room_price}}</span>
                     </div>
-                    <div class="col-md-6">
-                        <label>Last Name</label>
-                        <input type="text" value="" placeholder="Last Name">
-                    </div>
-                    <div class="col-md-6">
-                        <div class="medium-icons">
-                            <label>E-Mail</label>
-                            <input type="text" value="" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="medium-icons">
-                            <label>Phone</label>
-                            <input type="text" value="" placeholder="Phone">
-                        </div>
-                    </div>
+                    {% endfor %}
+                    
+                    
                 </div>
             </div>
 
@@ -147,12 +136,12 @@
         </div>
         <div class="col-lg-4 col-md-4 margin-top-0 utf_listing_payment_section">
             <div class="utf_booking_listing_item_container compact utf_order_summary_widget_section">
-                <div class="listing-item"> <img src="images/listing-item-04.jpg" alt="">
+                <div class="listing-item"> <img src="{{hotel.image.url}}" alt="">
                     <div class="utf_listing_item_content">
-                        <h3>Vintage Italian Beer Bar & Restaurant</h3>
-                        <span><i class="fa fa-map-marker"></i> The Ritz-Carlton, Hong Kong</span>
-                        <span><i class="fa fa-phone"></i> (+15) 124-796-3633</span>
-                        <div class="utf_star_rating_section" data-rating="4.5">
+                        <h3>{{hotel.name}}/h3>
+                        <span><i class="fa fa-map-marker"></i>{{hotel.address}}</span>
+                        <span><i class="fa fa-phone"></i> {{hotel.mobile}}</span>
+                        <!-- <div class="utf_star_rating_section" data-rating="4.5"> -->
                             <div class="utf_counter_star_rating">(18) Reviews</div>
                         </div>
                     </div>
@@ -161,13 +150,15 @@
             <div class="boxed-widget opening-hours summary margin-top-0">
                 <h3><i class="fa fa-calendar-check-o"></i> Booking Summary</h3>
                 <ul>
-                    <li>Appearing <span>10 Jan 2022</span></li>
-                    <li>Hour <span>1:30 PM</span></li>
-                    <li>Disappearing <span>16 Jan 2022</span></li>
-                    <li>Guests <span>3 Adults</span></li>
+                    <li>Checkin <span>{{checkin}}</span></li>
+                    <!-- <li>Hour <span>1:30 PM</span></li> -->
+                    <li>Checkout <span>{{checkout}}</span></li>
+                    <li>Total Days <span>{{total_days}}</span></li>
+                    <li>Adults <span>{{adult}}</span></li>
+                    <li>Children <span>{{children}}</span></li>
                     <li>Deposit <span>$230.00</span></li>
                     <li>V.A.T <span>$18.00</span></li>
-                    <li class="total-costs">Sub Total <span>$248.00</span></li>
+                    <li class="total-costs">Total Cost <span>{{total}}</span></li>
                     <li class="total-costs">
                         <div class="col-md-8">
                             <input id="couponCode" placeholder="Have a coupon enter here..." required="" type="text">
