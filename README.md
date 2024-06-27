@@ -27,3 +27,13 @@ While the current focus is on delivering a Minimum Viable Product (MVP) with ess
 - **Email Features:** Automate email notifications for various actions such as booking confirmation, reminders, and updates.
 
 The Homifice Hotel Management System aims to provide an all-in-one solution for hotel management and guest services, ensuring a smooth and satisfying experience for all users.
+
+
+## Extras
+- used a customized django admin system - jazzmin
+- Optimized front end code by using django template inheritance
+- integrated sweet alert for javascript alerts and pop ups
+- integrated CKEditor 5 for rich text formatting 
+- hotel list view -> hotel detail view
+- hotel room type-> room type detail
+- used session to carry user selection 
