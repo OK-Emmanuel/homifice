@@ -192,7 +192,7 @@ class Booking(models.Model):
     saved = models.DecimalField(max_digits=12, decimal_places=2, default=0.00)
     
     check_in_date = models.DateField()
-    check_out_date = models.DateField
+    check_out_date = models.DateField(null=True, blank=True)
     
     total_days = models.PositiveIntegerField(default=0)
     num_adults = models.PositiveIntegerField(default=1)
@@ -209,10 +209,10 @@ class Booking(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     stripe_payment_intent = models.CharField(max_length=1000, null=True, blank=True)
     successID = models.CharField(max_length=1000, null=True, blank=True)
-    bookingID = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvwxyz")
+    booking_id = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvwxyz")
     
     def __str__(self):
-        return f"{self.bookingID}"
+        return f"{self.booking_id}"
     
     # Count rooms
     def rooms(self):

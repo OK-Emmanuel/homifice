@@ -2,9 +2,7 @@ $(document).ready(function(){
     // add to selection function
     $('.add-to-selection').on("click", function(){
         let button = $(this)
-
         let id = button.attr("data-index")
-
         let hotel_id = $("#id").val()
         let room_id = $(`.room_id_${id}`).val()
         let room_number  = $(`.room_number_${id}`).val()
@@ -17,6 +15,10 @@ $(document).ready(function(){
         let checkout = $("#checkout").val()
         let adult = $("#adult").val()
         let children = $("#children").val()
+
+        // Debugging: Log the collected data
+        console.log("Check-in date:", checkin)
+        console.log("Check-out date:", checkout)
 
         // Send data via ajax
         $.ajax({
@@ -40,10 +42,35 @@ $(document).ready(function(){
             dataType: "json",
             beforeSend: function() {
                 console.log("Sending data to server");
+                button.html("<i class='fas fa-spinner fa-spin' </i> Processing")
             },
             success: function(response){
-                console.log("")
+                console.log(response)
+                $(".room-count").text(response.total_selected_items)
+                button.html("<button class='button border' <i class='sl sl-icon-basket'></i>Selected </button>")
             }
         })
     })
+})
+
+// Delete items
+$(document).on("click", ".delete-item", function(){
+    console.log("Hello world")
+    let id = $(this).attr("data-item")
+    let button = $(this)
+
+    $.ajax({
+        url: "/booking/delete_selection/",
+        data: {
+            "id":id
+        },
+        dataType: "json",
+        beforeSend: function() {
+            button.html("<i class='fas fa-spinner fa-spin' </i> ")
+        },
+        success: function(res){
+            $(".selection-list").html(res.data)
+        }
+    })
+
 })

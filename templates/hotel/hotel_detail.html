@@ -28,11 +28,11 @@
                     <ul class="listing_item_social">
                         <li><a href="#"><i class="fa fa-bookmark"></i> Bookmark</a></li>
                         <li><a href="#"><i class="fa fa-star"></i> Add Review</a></li>
-                        
-                        {% if hotel.featured == True %} 
+
+                        {% if hotel.featured == True %}
                         <li><a href="#"><i class="fa fa-flag"></i> Featured</a></li>
                         {% endif %}
-                        
+
                         <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
                         <li><a href="#" class="now_open">Open Now</a></li>
                     </ul>
@@ -60,7 +60,7 @@
                 <h3 class="utf_listing_headline_part margin-top-40 margin-bottom-40">Tags</h3>
 
                 {% for all_tags in hotel.tags.all %}
-                    <a href="#"><i class="fa fa-tag" aria-hidden="true"></i> {{ all_tags.name }}</a>
+                <a href="#"><i class="fa fa-tag" aria-hidden="true"></i> {{ all_tags.name }}</a>
                 {% endfor %}
             </div>
 
@@ -76,7 +76,8 @@
                                 <p><strong>Price: </strong>{{rooms.price}} / Night </p>
                                 <p><strong>Room Capacity: </strong>{{rooms.room_capacity}} People </p>
                                 <p><strong>Number of Beds: </strong>{{rooms.number_of_beds}} </p>
-                                <p><a href="{% url 'hotel:room_type_detail' rooms.hotel.slug rooms.slug%}" class="text-muted">View More <i class="fas fa-link"></i></a></p>
+                                <p><a href="{% url 'hotel:room_type_detail' rooms.hotel.slug rooms.slug%}"
+                                        class="text-muted">View More <i class="fas fa-link"></i></a></p>
                                 <span>{{rooms.price}}</span>
                             </li>
 
@@ -370,48 +371,50 @@
             <div class="verified-badge with-tip margin-bottom-30"
                 data-tip-content="Purchase ticket has been verified and belongs business owner or manager."> <i
                     class="sl sl-icon-check"></i> Now Available</div>
-                    <div class="utf_box_widget booking_widget_box shadow-lg p-30">
+                    <div class="utf_box_widget booking_widget_box shadow-lg ">
                         <h3><i class="fa fa-calendar"></i> Check Room Availability</h3>
-                        <form class="row with-forms margin-top-0" method="POST">
-                          <input type="hidden" name="hotel-id" value="{{hotel.id}}">
-              
-                          <div class="select_date_box">
-                            <label for="Checkin">Check-in Date</label>
-                            <input type="date" id="date-picker" placeholder="Select Date">
-                          </div>
-              
-                          <div class="select_date_box">
-                            <label for="Checkout">Check-out Date</label>
-                            <input type="date" id="date-picker" placeholder="Select Date">
-                          </div>
-              
-                          <div class="with-forms">
-                            <div class="col-lg-12">
-                              <a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>
-                              <div class="panel-dropdown-content">
-                                <div class="qtyButtons">
-                                  <div class="qtyTitle">Adults</div>
-                                  <input type="text" name="qtyInput" value="1">
-                                </div>
-                                <div class="qtyButtons">
-                                  <div class="qtyTitle">Children</div>
-                                  <input type="text" name="qtyInput" value="1">
+                        <form class="row with-forms margin-top-0" method="POST" action="{% url 'booking:check_room_availability' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="hotel-id" value="{{hotel.id}}">
+                
+                            <div class="select_date_box">
+                              <label for="checkin">Check-in Date</label>
+                              <input type="date" name="checkin" id="checkin" ="Select Date">
+                            </div>
+                
+                            <div class="select_date_box">
+                              <label for="checkout">Check-out Date</label>
+                              <input type="date" id="checkout" name="checkout" placeholder="Select Date">
+                            </div>
+                
+                            <div class="with-forms ">
+                              <div class="col-lg-12">
+                                <a href="#" class="qtyTotal" style="visibility: hidden;">Guests</a>
+                                <div class="panel-dropdown-content">
+                                  <div class="qtyButtons">
+                                    <div class="qtyTitle">Adults</div>
+                                    <input type="text" class="qtyInput" name="adult" value="1">
+                                  </div>
+                                  <div class="qtyButtons">
+                                    <div class="qtyTitle">Children</div>
+                                    <input type="text" class="qtyInput" name="children" value="0">
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-              
-                          <div class="with-forms margin-top-30">
-                            <a href="#">Select Room Type</a>
-                            <select name="room-type" class="utf_chosen_select_sing;e" required id="">
-                              <option value="">King</option>
-                              <option value="">Luxury</option>
-                            </select>
-                          </div>
-                          <button class="like-button add_to_wishlist"><span class="like-icon"></span> Add to Wishlist</button>
-                          <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5">Check
-                            Availability</button>
-                        </form>
+                
+                            <div class="with-forms margin-top-30">
+                              <a href="#">Select Room Type</a>
+                              <select name="room_type" class="utf_chosen_select_single" required id="">
+                                {% for r in hotel.hotel_room_types %}
+                                <option value="{{r.slug}}">{{r.type}}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <button class="like-button add_to_wishlist"><span class="like-icon"></span> Add to Wishlist</button>
+                            <button type="submit" class="utf_progress_button button fullwidth_block margin-top-5">Check
+                              Availability</button>
+                          </form>
               
                         <div class="clearfix"></div>
                       </div>

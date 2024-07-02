@@ -21,8 +21,9 @@
             <div class="utf_booking_listing_section_form margin-bottom-40">
                 <h3><i class="fa fa-bed"></i> Selected Rooms </h3>
                 <div class="row">
+                    <h4>{{hotel.name}}</h4>
                     {% for id, item in data.items %}
-                    <div class="col-md-6">
+                    <div class="col">
                         <h4>{{item.room_name}}</h4> 
                         <span><a href="" style="cursor: pointer;" class="delete-item" data-item="{{id}}"><i class="fa fa-trash"></i></a></span>
                         <p>Beds: {{item.number_of_beds}}</p>
@@ -43,7 +44,7 @@
                         <div class="col-md-6">
                             <div class="card-label">
                                 <label for="name">Name</label>
-                                <input id="nameOnCard" name="full_name" placeholder="Name" required="" type="text">
+                                <input id="name" name="full_name" placeholder="Name" required="" type="text">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -101,31 +102,5 @@
 </div>
 </div>
 
-<section class="utf_cta_area_item utf_cta_area2_block">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="utf_subscribe_block clearfix">
-                    <div class="col-md-8 col-sm-7">
-                        <div class="section-heading">
-                            <h2 class="utf_sec_title_item utf_sec_title_item2">Subscribe to Newsletter!</h2>
-                            <p class="utf_sec_meta">
-                                Subscribe to get latest updates and information.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-5">
-                        <div class="contact-form-action">
-                            <form method="post">
-                                <span class="la la-envelope-o"></span>
-                                <input class="form-control" type="email" placeholder="Enter your email" required="">
-                                <button class="utf_theme_btn" type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 </div>
