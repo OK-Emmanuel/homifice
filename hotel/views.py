@@ -57,19 +57,86 @@ def selected_rooms(request):
     checkout = ""
 
     if 'selection_data_obj' in request.session:
+
+        if request.method == "POST":
+            for h_id, item in request.session['selection_data_obj'].items():
+                # Execute code on submission
+                id = int(item['hotel_id'])
+                checkin = item['checkin']
+                checkout = item['checkout']
+                adult = int(item['adult'])  
+                children = int(item['children'])
+                room_type_ = int(item['room_type'])
+                room_id = int(item['room_id'])
+                room_type = RoomType.objects.get(id=room_type_)
+
+                user = request.user
+                hotel = Hotel.objects.get(id=id)
+                room = Room.objects.get(id=room_id)
+                room_type = RoomType.objects.get(id=room_type_)
+            
+            # Debugging: Log the session data
+            print(f"Check-in date from session: {checkin}")
+            print(f"Check-out date from session: {checkout}")
+
+            # Calculate total booked days
+            date_format = "%Y-%m-%d"
+            checkin_date = datetime.datetime.strptime(checkin, date_format)
+            checkout_date = datetime.datetime.strptime(checkout, date_format)
+            time_difference = checkout_date - checkin_date
+            total_days = time_difference.days
+
+            full_name = request.POST.get('full_name')
+            email = request.POST.get('email')
+            phone = request.POST.get('phone')
+
+            booking = Booking.objects.create(
+                hotel=hotel,
+                room_type=room_type,
+                check_in_date=checkin,
+                check_out_date=checkout,
+                total_days=total_days,
+                num_adults=adult,
+                num_children=children,
+                full_name=full_name,
+                email=email,
+                phone=phone,
+                user=request.user or None
+            )
+ 
+            for h_id, item in request.session['selection_data_obj'].items():
+                room_id = int(item["room_id"])
+                room = Room.objects.get(id=room_id)
+                booking.room.add(room)
+
+                room_count += 1
+                days = total_days
+                price = room_type.price
+                room_price = price * room_count
+                total = room_price * days
+            
+            booking.total += float(total)
+            booking.before_discount += float(total)
+            booking.save()
+
+            return redirect("hotel:checkout", booking.booking_id)
+
+
         hotel = None
         for h_id, item in request.session['selection_data_obj'].items():
-            # Retrieve room selection details from session
             id = int(item['hotel_id'])
             checkin = item['checkin']
             checkout = item['checkout']
-            adult = int(item['adult'])
+            adult = int(item['adult'])  
             children = int(item['children'])
             room_type_ = int(item['room_type'])
             room_id = int(item['room_id'])
             room_type = RoomType.objects.get(id=room_type_)
+            
+            # Debugging: Log the session data
+            print(f"Check-in date from session: {checkin}")
+            print(f"Check-out date from session: {checkout}")
 
-            # Calculate total booked days
             date_format = "%Y-%m-%d"
             checkin_date = datetime.datetime.strptime(checkin, date_format)
             checkout_date = datetime.datetime.strptime(checkout, date_format)
@@ -81,7 +148,7 @@ def selected_rooms(request):
             price = room_type.price
 
             room_price = price * room_count
-            total_price = room_price * days
+            total = room_price * days
 
             hotel = Hotel.objects.get(id=id)
         
@@ -98,6 +165,15 @@ def selected_rooms(request):
         }
         return render(request, "hotel/selected_rooms.html", context)
     else:
-        # Display warning message if no room is selected
         messages.warning(request, "No selected room yet")
         return redirect("/")
+
+
+def checkout(request, booking_id):
+    booking = Booking.objects.get(booking_id=booking_id)
+
+    context = {
+        "booking": booking
+    }
+
+    return render(request,"hotel/checkout.html", context)

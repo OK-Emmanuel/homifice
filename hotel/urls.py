@@ -16,5 +16,8 @@ urlpatterns = [
     path("detail/<slug:slug>/room-type/<slug:rt_slug>/", views.room_type_detail, name="room_type_detail"),
     
     # URL pattern for the selected rooms view
-    path("selected_rooms/", views.selected_rooms, name="selected_rooms")
+    path("selected_rooms/", views.selected_rooms, name="selected_rooms"),
+
+    # URL pattern for checkout
+    path("checkout/<booking_id>/ ", views.checkout, name="checkout")
 ]
