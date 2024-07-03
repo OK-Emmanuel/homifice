@@ -1,7 +1,7 @@
 import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from hotel.models import Hotel, Booking, ActivityLog, StaffOnDuty, Room, RoomType, HotelFaqs, HotelFeatures, HotelGallery
+from hotel.models import Hotel, Booking, ActivityLog, StaffOnDuty, Room, RoomType, Coupon, HotelFaqs, HotelFeatures, HotelGallery
 
 # Display the list of live hotels on the index page
 def index(request):
@@ -171,9 +171,37 @@ def selected_rooms(request):
 
 def checkout(request, booking_id):
     booking = Booking.objects.get(booking_id=booking_id)
+    if request.method == "POST":
+            code = request.POST.get('code')
+            try:
+                coupon = Coupon.objects.get(code__iexact=code, active=True)
+                if coupon in booking.coupons.all():
+                    messages.warning(request, "Coupon already applied to this booking.")
+                    return redirect("hotel:checkout", booking.booking_id)
+                
+                else:
+                    if coupon.type == "Percentage":
+                        discount = booking.total * (coupon.discount / 100)
+                    else:
+                        discount = coupon.discount
 
+                    booking.coupons.add(coupon)
+                    booking.total -= discount
+                    booking.saved += discount
+                    booking.save()
+
+
+                    messages.success(request, "Coupon applied successfully.")
+                    return redirect("hotel:checkout", booking.booking_id)
+                
+
+                # print("coupon ============", coupon)
+            except:
+                messages.warning(request, "Invalid Coupon Code")
+                # print("coupon does note exist")
     context = {
         "booking": booking
     }
 
     return render(request,"hotel/checkout.html", context)
+

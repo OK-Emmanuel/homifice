@@ -82,12 +82,24 @@
             <h3><i class="fa fa-calendar-check-o"></i> Booking Summary</h3>
             <ul>
                 <li>Checkin <span>{{booking.check_in_date}}</span></li>
-                <!-- <li>Hour <span>1:30 PM</span></li> -->
                 <li>Checkout <span>{{booking.check_out_date}}</span></li>
                 <li>Total Days <span>{{booking.total_days}}</span></li>
                 <li>Adults <span>{{booking.num_adults}}</span></li>
                 <li>Children <span>{{booking.num_children}}</span></li>
                 <li class="total-costs">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="col-md-8">
+                            <input type="text" id="couponCode" name="code" placeholder="Your Coupon Code">
+                        </div>
+
+                        <div class="col-md-4">
+                            <input type="submit" class="coupon_code" value="Apply">
+                        </div>
+                    </form>
+                    <div class="clearfix"></div>
+                </li>
+                    <li class="total-costs">
                     <h4>Total Cost <span>{{booking.total}} <span></h4>
                 </li>
 

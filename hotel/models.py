@@ -205,10 +205,11 @@ class Booking(models.Model):
     
     checked_in_tracker = models.BooleanField(default=False)
     checked_out_tracker = models.BooleanField(default=False)
+    coupons = models.ManyToManyField("hotel.Coupon", blank=True)
     
     date = models.DateTimeField(auto_now_add=True)
     stripe_payment_intent = models.CharField(max_length=1000, null=True, blank=True)
-    successID = models.CharField(max_length=1000, null=True, blank=True)
+    successID = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvwxyz", null=True, blank=True)
     booking_id = ShortUUIDField(unique=True, length=10, max_length=20, alphabet="abcdefghijklmnopqrstuvwxyz")
     
     def __str__(self):
@@ -237,3 +238,18 @@ class StaffOnDuty(models.Model):
     
     def __str__(self):
         return f"{self.staff_id}"
+
+# Coupon model
+class Coupon(models.Model):
+    code = models.CharField(max_length=100)
+    type = models.CharField(max_length=100, default="Percentage")
+    discount = models.DecimalField(decimal_places=2, max_digits=100, default=1.00)
+    redemptions = models.IntegerField(default=0)
+    date = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+    valid_from = models.DateField(null=True, blank=True)
+    valid_to = models.DateTimeField()
+    couponId = ShortUUIDField(unique=True, length=10, max_length=50)
+
+    def __str__(self):
+        return f"{self.code}" 
