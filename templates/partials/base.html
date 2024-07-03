@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="{% static 'css/mmenu.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}" id="colors">
     <!-- Include JQuery -->
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Sweet Alert -->
-    <scipt src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Google Font -->
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,800&amp;display=swap&amp;subset=latin-ext,vietnamese"
@@ -247,13 +247,13 @@
   
 <!-- Loop messages -->
     <script>
-    {% for message in messages  %}
-        Swal.fire({
-            icon: "{{message.tags}}",
-            title: "{{message}}",
-            timer: 1500
-        })
-    {% endfor %}
+        {% for message in messages  %}
+            Swal.fire({
+                icon: "{{message.tags}}",
+                title: "{{message}}",
+                timer: 1500
+            })
+        {% endfor %}
     </script>
     
     <!-- Scripts -->
