@@ -1,0 +1,99 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="titlebar" class="gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Choose Payment Option</h2>
+                <nav id="breadcrumbs">
+                    <ul>
+                        <li><a href="index_1.html">Home</a></li>
+                        <li>Choose Payment Option</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container margin-bottom-75">
+    <div class="row">
+        <div class="col-lg-8 col-md-8 utf_listing_payment_section">
+            <div class="utf_booking_listing_section_form margin-bottom-40">
+                <h3><i class="fa fa-bed"></i> Selected Rooms </h3>
+                <div class="row">
+                    <div class="utf_pricing_list_section">
+                        <ul>
+                            {% for r in booking.room.all %}
+                                <li>
+                                    <h5>{{r.room_type.type}} Room</h5>
+                                    </span>
+                                    <p><strong>Room Type: </strong></p>
+                                    <p><strong>Number of Beds: {{r.room_type.number_of_beds}} </strong> </p>
+                                    <p><strong>Room Number: {{r.room_number}} </strong> </p>
+                                    <span> {{r.room_type.price}} &nbsp; <a style="cursor: pointer; border-left: 1px solid black" class="delete-item padding-left-20" data-item="{{id}}"><i class="fa fa-trash"></i></a></span> 
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="utf_booking_listing_section_form margin-bottom-40">
+                <h3><i class="sl sl-icon-paper-plane"></i> Billing Information</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Full Name</label>
+                        <input type="text" value="{{booking.full_name}}" style="background-color: #e6e2df;" class="bg-secondary" readonly placeholder="First Name">
+                    </div>
+                   
+                    <div class="col-md-6">
+                        <div class="medium-icons">
+                            <label>E-Mail</label>
+                            <input type="text" value="{{booking.email}}" style="background-color: #e6e2df;" readonly placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="medium-icons">
+                            <label>Phone</label>
+                            <input type="text" value="{{booking.phone}}" style="background-color: #e6e2df;" readonly placeholder="Phone">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        <div class="col-lg-4 col-md-4 margin-top-0 utf_listing_payment_section">
+            <div class="utf_booking_listing_item_container compact utf_order_summary_widget_section">
+                <div class="listing-item"> <img src="{{booking.hotel.image.url}}" style="object-fit:cover" alt="">
+                    <div class="utf_listing_item_content">
+                        <h3 style="font-weight: bold; margin-bottom:10px">{{booking.hotel.name}}</h3>
+                        <span style="text-wrap: balance;"><i class="fa fa-map-marker"></i>{{booking.hotel.address}}</span>
+                        <span><i class="fa fa-phone"></i> {{booking.hotel.mobile}}</span>
+                        <!-- <div class="utf_star_rating_section" data-rating="4.5"> -->
+                        <!-- <div class="utf_counter_star_rating">(18) Reviews</div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="boxed-widget opening-hours summary margin-top-0">
+            <h3><i class="fa fa-calendar-check-o"></i> Booking Summary</h3>
+            <ul>
+                <li>Checkin <span>{{booking.check_in_date}}</span></li>
+                <!-- <li>Hour <span>1:30 PM</span></li> -->
+                <li>Checkout <span>{{booking.check_out_date}}</span></li>
+                <li>Total Days <span>{{booking.total_days}}</span></li>
+                <li>Adults <span>{{booking.num_adults}}</span></li>
+                <li>Children <span>{{booking.num_children}}</span></li>
+                <li class="total-costs">
+                    <h4>Total Cost <span>{{booking.total}} <span></h4>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content%}

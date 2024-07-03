@@ -21,17 +21,19 @@
             <div class="utf_booking_listing_section_form margin-bottom-40">
                 <h3><i class="fa fa-bed"></i> Selected Rooms </h3>
                 <div class="row">
-                    <h4>{{hotel.name}}</h4>
-                    {% for id, item in data.items %}
-                    <div class="col">
-                        <h4>{{item.room_name}}</h4> 
-                        <span><a href="" style="cursor: pointer;" class="delete-item" data-item="{{id}}"><i class="fa fa-trash"></i></a></span>
-                        <p>Beds: {{item.number_of_beds}}</p>
-                        <span>Price: {{item.room_price}}</span>
+                    <div class="utf_pricing_list_section">
+                        <ul>
+                            {% for id, item in data.items %}
+                                <li>
+                                    <h5>{{item.room_name}}</h5>
+                                    </span>
+                                    <p><strong>Room Type: </strong></p>
+                                    <p><strong>Number of Beds: {{item.number_of_beds}} </strong> </p>
+                                    <span> {{item.room_price}} &nbsp; <a style="cursor: pointer; border-left: 1px solid black" class="delete-item padding-left-20" data-item="{{id}}"><i class="fa fa-trash btn-danger"></i></a></span> 
+                                </li>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    {% endfor %}
-
-
                 </div>
             </div>
 
