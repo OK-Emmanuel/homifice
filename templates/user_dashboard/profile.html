@@ -1,0 +1,81 @@
+{% extends 'partials/dashboard_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12">
+        <div class="utf_dashboard_list_box margin-top-0">
+            <h4 class="gray"><i class="sl sl-icon-user"></i> Profile Details</h4>
+            <div class="utf_dashboard_list_box-static">
+                <form method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+
+                    <div class="edit-profile-photo" style="width:400px;" id="profile_image_preview"> <img src="{{ profile.image.url }}" alt="">
+                    <div class=" change-photo-btn">
+                        <div class="photoUpload"> <span><i class="fa fa-upload"></i> Upload Photo</span>
+                            <input type="file" class="upload" />
+                            {{ profileForm.image }}
+                        </div>
+                    </div>
+                </div>
+                <div class="my-profile">
+                <div class="row with-forms">
+                    <div class="col-md-6">
+                        <label>Full Name</label>
+                        {{ profileForm.full_name }}
+                    </div>
+                    <div class="col-md-6">
+                        <label>Email</label>
+                        {{ userForm.email}}
+                    </div>
+                    <div class="col-md-4">
+                        <label>Phone</label>
+                        {{ profileForm.phone }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Address</label>
+                        {{ profileForm.address }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Country</label>
+                        {{ profileForm.city }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Country</label>
+                        {{ profileForm.state }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Country</label>
+                        {{ profileForm.country }}
+                    </div>
+
+                </div>
+            </form>
+            </div>
+            <button type="submit" class="button preview btn_center_item margin-top-15">Save Changes</button>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="footer_copyright_part">Copyright © 2024 All Rights Reserved | Homifice </div>
+    <div class="footer_copyright_part">Developed By Olawuni Emmanuel Kayode </div>
+</div>
+</div>
+</div>
+
+<script>
+    let loadFie = function (event) {
+        let output2 = document.getElementById('profile_image_preview');
+        output2.src = URL.createObjectURL(event.target.files[0]);
+        output2.onload = function () {
+            URL.revokeObjectURL(output2.src) // free memory
+        }
+    }
+</script>
+{% endblock content %}
