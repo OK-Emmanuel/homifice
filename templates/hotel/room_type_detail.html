@@ -76,12 +76,12 @@
 
             <div class="select_date_box">
               <label for="checkin">Check-in Date</label>
-              <input type="date" name="checkin" id="checkin" ="Select Date">
+              <input type="date" class="date-pick_1" name="checkin" id="checkin" ="Select Date">
             </div>
 
             <div class="select_date_box">
               <label for="checkout">Check-out Date</label>
-              <input type="date" id="checkout" name="checkout" placeholder="Select Date">
+              <input type="date" class="date-pick_2" id="checkout" name="checkout" placeholder="Select Date">
             </div>
 
             <div class="with-forms ">
@@ -118,5 +118,14 @@
       </div>
     </div>
 </section>
+
+<!-- Limit booking to present or future date -->
+<script>
+  const today = new Date()
+  const formatToday = today.toISOString().split('T')[0];
+  console.log(formatToday);
+  document.querySelector(".date-pick_1").min = formatToday;
+  document.querySelector(".date-pick_2").min = formatToday;
+</script>
 
 {% endblock content %}

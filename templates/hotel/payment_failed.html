@@ -1,0 +1,33 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content%}
+
+<div id="titlebar" class="gradient">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Listing Booking</h2>
+          <nav id="breadcrumbs">
+            <ul>
+              <li><a href="index_1.html">Home</a></li>
+              <li>Listing Booking</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container margin-bottom-75">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="utf_booking_listing_confirmation_section"> 
+		  <i class="sl sl-icon-close text-danger"></i>
+          <h2>Payment Failed!</h2>
+          <p>Something went wrong. Please try the payment again</a></p>
+          <a href="dashboard_invoice.html" class="button margin-top-30">Check Invoice</a> 
+		</div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}

@@ -39,11 +39,11 @@
 
             <form class="utf_booking_payment_option_form" method="POST">
                 {% csrf_token %}
-                <h3><i class="sl sl-icon-credit-card "></i> Payment Method</h3>
+                <h3><i class="sl sl-icon-credit-card "></i> Billing Information </h3>
                 <div class="payment">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="card-label">
                                 <label for="name">Name</label>
                                 <input id="name" name="full_name" placeholder="Name" required="" type="text">
@@ -61,12 +61,7 @@
                                 <input id="phoneNumber" name="phone" placeholder="Phone Number" required="" type="text">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card-label">
-                                <label for="couponCode">Coupon Code?</label>
-                                <input id="couponCode" placeholder="Coupon Code" type="text">
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
                 <button type="submit" class="button utf_booking_confirmation_button margin-top-20 margin-bottom-10">Coontinue to Checkout</a>
