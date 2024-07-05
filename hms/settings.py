@@ -27,6 +27,7 @@ SECRET_KEY = 'django-insecure-rigezp_&wp7=f+-ahv@6(p&i8c7u^5r7%e4%v7r&ny!$zx!(^0
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 
 # Application definition
@@ -146,6 +147,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "userauths.User"
 
+LOGIN_URL = "userauths:sign-in"
+LOGOUT_REDIRECT_URL = "userauths:sign-in"
 
 # Jazzmin Config
 JAZZMIN_SETTINGS = {
@@ -264,7 +267,7 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_nav_compact_style": False,
     "sidebar_nav_legacy_style": False,
     "sidebar_nav_flat_style": False,
-    "theme": "cyborg",
+    "theme": "default",
     "dark_mode_theme": None,
     "button_classes": {
         "primary": "btn-primary",
@@ -278,31 +281,32 @@ JAZZMIN_UI_TWEAKS = {
 
 # CK Editor5 Tweaks
 customColorPalette = [
-        {
-            'color': 'hsl(4, 90%, 58%)',
-            'label': 'Red'
-        },
-        {
-            'color': 'hsl(340, 82%, 52%)',
-            'label': 'Pink'
-        },
-        {
-            'color': 'hsl(291, 64%, 42%)',
-            'label': 'Purple'
-        },
-        {
-            'color': 'hsl(262, 52%, 47%)',
-            'label': 'Deep Purple'
-        },
-        {
-            'color': 'hsl(231, 48%, 48%)',
-            'label': 'Indigo'
-        },
-        {
-            'color': 'hsl(207, 90%, 54%)',
-            'label': 'Blue'
-        },
-    ]
+    {
+        'color': 'hsl(24, 90%, 58%)',
+        'label': 'Orange'
+    },
+    {
+        'color': 'hsl(36, 77%, 49%)',
+        'label': 'Amber'
+    },
+    {
+        'color': 'hsl(14, 82%, 52%)',
+        'label': 'Dark Orange'
+    },
+    {
+        'color': 'hsl(46, 89%, 55%)',
+        'label': 'Gold'
+    },
+    {
+        'color': 'hsl(16, 100%, 60%)',
+        'label': 'Bright Orange'
+    },
+    {
+        'color': 'hsl(30, 70%, 50%)',
+        'label': 'Burnt Orange'
+    },
+]
+
 
  
 CKEDITOR_5_CONFIGS = {

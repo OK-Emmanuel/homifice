@@ -74,3 +74,17 @@ $(document).on("click", ".delete-item", function(){
     })
 
 })
+
+
+// Update room status
+function makeAjaxCall(){
+    $.ajax({
+        url: "/update_room_status/",
+        type: "GET",
+        success: function(data) {
+            console.log("AJAX call successful.");
+        },
+    });
+}
+
+setInterval(makeAjaxCall, 3600000); // Call the function every one hour (3600000 milliseconds = 1 hour) or 60000 milli

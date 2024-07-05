@@ -1,7 +1,13 @@
 import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from hotel.models import Hotel, Booking, ActivityLog, StaffOnDuty, Room, RoomType, Coupon, HotelFaqs, HotelFeatures, HotelGallery
+from decimal import Decimal
+from django.utils import timezone
+from django.http import HttpResponse
+
+
 
 # Display the list of live hotels on the index page
 def index(request):
@@ -76,8 +82,8 @@ def selected_rooms(request):
                 room_type = RoomType.objects.get(id=room_type_)
             
             # Debugging: Log the session data
-            print(f"Check-in date from session: {checkin}")
-            print(f"Check-out date from session: {checkout}")
+            # print(f"Check-in date from session: {checkin}")
+            # print(f"Check-out date from session: {checkout}")
 
             # Calculate total booked days
             date_format = "%Y-%m-%d"
@@ -101,7 +107,8 @@ def selected_rooms(request):
                 full_name=full_name,
                 email=email,
                 phone=phone,
-                user=request.user or None
+                user=request.user or None,
+                payment_status="processing",
             )
  
             for h_id, item in request.session['selection_data_obj'].items():
@@ -134,8 +141,8 @@ def selected_rooms(request):
             room_type = RoomType.objects.get(id=room_type_)
             
             # Debugging: Log the session data
-            print(f"Check-in date from session: {checkin}")
-            print(f"Check-out date from session: {checkout}")
+            # print(f"Check-in date from session: {checkin}")
+            # print(f"Check-out date from session: {checkout}")
 
             date_format = "%Y-%m-%d"
             checkin_date = datetime.datetime.strptime(checkin, date_format)
@@ -205,3 +212,92 @@ def checkout(request, booking_id):
 
     return render(request,"hotel/checkout.html", context)
 
+def payment_success(request, booking_id):
+    successID = request.GET.get('successID')
+    booking_total = request.GET.get('booking_total')
+
+    if successID and booking_total:
+        successID = successID.rstrip("/")
+        # booking_total = booking_total.rstrip("/")
+
+        booking = Booking.objects.get(booking_id=booking_id,successID=successID)
+
+        # if booking.total == booking_total:
+            # messages.success(request, "payment successfull") 
+        if booking.payment_status == "processing":
+            booking.payment_status = "paid"
+            booking.is_active = True
+            booking.save()
+
+            # Future update
+            # notify = Notification.objects.create(booking=booking, message="Payment Successful")
+
+            # Clear cart
+            if 'selection_data_obj' in request.session:
+                del request.session['selection_data_obj']
+
+        else:
+            messages.success(request, "Payment already processed for this booking.")
+            return redirect("/")
+
+    else:
+        messages.error(request, "Payment Failed to Match. Manipulation, is that you 😜?")
+
+    context = {
+        "booking": booking
+    }
+    return render(request, "hotel/payment_success.html", context)
+
+def payment_failed(request, booking_id):
+    return render(request, "hotel/payment_failed.html", {"booking_id": booking_id})
+
+def update_room_status(request):
+    today =timezone.now().date()
+    
+    booking = Booking.objects.filter(is_active=True, payment_status="paid")
+    
+    # Checkin processes
+    for b in booking:
+        # if user books a future date, the room will remain available till then
+        if b.checked_in_tracker != True:
+            if b.check_in_date > today:
+                b.checked_in_tracker = False
+                b.checked_in = False
+                b.save()
+
+                for r in b.room.all():
+                    r.is_available = True
+                    r.save()
+            
+            # the room is not available
+            else:
+                b.checked_in_tracker = True
+                b.checked_in = True
+                b.save
+
+                for r in b.room.all():
+                    r.is_available = False
+                    r.save()
+
+        # Checkout processes
+        else:
+            if b.check_out_date > today:
+                b.checked_out_tracker = False
+                b.checked_in = False
+                b.save
+
+                for r in b.room.all():
+                    r.is_available = False
+                    r.save()
+            
+            # the room is available
+            else:
+                b.checked_out_tracker = True
+                b.checked_out = True
+                b.save()
+
+                for r in b.room.all():
+                    r.is_available = True
+                    r.save()
+    
+    return HttpResponse(today)

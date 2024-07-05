@@ -19,5 +19,14 @@ urlpatterns = [
     path("selected_rooms/", views.selected_rooms, name="selected_rooms"),
 
     # URL pattern for checkout
-    path("checkout/<booking_id>/ ", views.checkout, name="checkout")
+    path("checkout/<booking_id>/ ", views.checkout, name="checkout"),
+    
+    # URL pattern for room update
+    path("update_room_status/", views.update_room_status, name="update_room_status"),
+
+    # URL pattern for the payment success
+    path("success/<booking_id>/", views.payment_success, name="payment_success"),
+    
+    # URL pattern for the payment failure
+    path("failed/<booking_id>/", views.payment_failed, name="payment_failed"),
 ]
