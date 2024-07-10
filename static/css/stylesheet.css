@@ -25,7 +25,7 @@ Version: 1.0
 Table Of Content
 ------------------------------------
 
-#. Loader Css
+
 #. Typography
 #. Loader
 #. Header
@@ -110,83 +110,32 @@ Global Vars
 
 
 
-/*==========
-  Loader Css
-============*/
 
 
-.preloader {
-	background: radial-gradient(circle, #ffffff, #f3f3f3);
-	bottom: 0;
-	height: 100%;
-	left: 0;
-	position: fixed;
-	right: 0;
-	top: 0;
-	width: 100%;
-	z-index: 9999;
-}
-.utf-preloader {
-	margin: 0 auto;
-	position: relative;
-	top: 50%;
-	-moz-transform: translateY(-50%);
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
-	width: 90px;
-	text-align: center;
-	z-index: 9999;
-}
-.utf-preloader span {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
-	border-radius: 50%;
-	background: var(--color-main);
-	-webkit-animation: ball-pulse-sync .6s 0s infinite ease-in-out;
-	animation: ball-pulse-sync .6s 0s infinite ease-in-out;
-}
-.utf-preloader span:nth-child(1) {
-	-webkit-animation:ball-pulse-sync .6s -.14s infinite ease-in-out;
-	animation:ball-pulse-sync .6s -.14s infinite ease-in-out
-}
-.utf-preloader span:nth-child(2) {
-	-webkit-animation:ball-pulse-sync .6s -70ms infinite ease-in-out;
-	animation:ball-pulse-sync .6s -70ms infinite ease-in-out
-}
-@-webkit-keyframes ball-pulse-sync {
-	33% {
-		-webkit-transform:translateY(10px);
-		transform:translateY(10px)
- }
-	66% {
-		-webkit-transform:translateY(-10px);
-		transform:translateY(-10px)
-	}
-	100% {
-		-webkit-transform:translateY(0);
-		transform:translateY(0)
-	}
-}
-@keyframes ball-pulse-sync {
-	33% {
-		-webkit-transform:translateY(10px);
-		transform:translateY(10px)
-	}
-	66% {
-		-webkit-transform:translateY(-10px);
-		transform:translateY(-10px)
-	}
-	100% {
-		-webkit-transform:translateY(0);
-		transform:translateY(0)
-	}
-}
+
 
 /*==========
   Typography
 ============*/
+.cinzel-decorative-regular {
+	font-family: "Cinzel Decorative", serif;
+	font-weight: 400;
+	font-style: normal;
+  }
+  
+  .cinzel-decorative-bold {
+	font-family: "Cinzel Decorative", serif;
+	font-weight: 700;
+	font-style: normal;
+  }
+  
+  .cinzel-decorative-black {
+	font-family: "Cinzel Decorative", serif;
+	font-weight: 900;
+	font-style: normal;
+  }
 
+  
 body {
 	color: #707070;
 	font-size: 15px;
@@ -494,7 +443,7 @@ header.fullwidth_block .container {
 	transition: 0.3s;
 }
 .header-one .search_container_block:before {
-	background: rgba(48,48,48,.80)
+	background: rgba(42,14, 2, 0.8)
 }
 
 /*==========

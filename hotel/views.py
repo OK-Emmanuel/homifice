@@ -2,7 +2,8 @@ import datetime
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-from hotel.models import Hotel, Booking, ActivityLog, StaffOnDuty, Room, RoomType, Coupon, HotelFaqs, HotelFeatures, HotelGallery
+from hotel.models import Hotel, Booking, Room, RoomType, Coupon
+from userauths.models import Profile
 from decimal import Decimal
 from django.utils import timezone
 from django.http import HttpResponse
@@ -16,6 +17,20 @@ def index(request):
         "hotels": hotels
     }
     return render(request, "hotel/hotel.html", context)
+
+# Display the list of featured  hotel
+def hotel_list(request):
+    featured_hotels = Hotel.objects.filter(featured=True)[:3]
+    return render(request, 'hotel/hotel.html', {'hotels': featured_hotels})
+
+def profile(request):
+    profile = Profile.objects.get(user=request.user)
+    
+    context = {
+        "profile": profile
+    }
+    return render(request, "hotel/hotel.html", context)
+
 
 # Display details of a specific hotel
 def hotel_detail(request, slug):
@@ -176,6 +191,7 @@ def selected_rooms(request):
         return redirect("/")
 
 
+# Calculate total payable amount with or without coupon
 def checkout(request, booking_id):
     booking = Booking.objects.get(booking_id=booking_id)
     if request.method == "POST":
@@ -197,12 +213,9 @@ def checkout(request, booking_id):
                     booking.saved += discount
                     booking.save()
 
-
                     messages.success(request, "Coupon applied successfully.")
                     return redirect("hotel:checkout", booking.booking_id)
-                
-
-                # print("coupon ============", coupon)
+  
             except:
                 messages.warning(request, "Invalid Coupon Code")
                 # print("coupon does note exist")

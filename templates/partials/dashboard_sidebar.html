@@ -5,7 +5,7 @@
           <li class="active"><a href="{% url 'user_dashboard:dashboard' %}"><i class="sl sl-icon-layers"></i> Dashboard</a></li>       
 		  <li><a href="{% url 'user_dashboard:bookings' %}"><i class="sl sl-icon-docs"></i> All Bookings</a></li>		                               		 
 		  <li><a href="{% url 'user_dashboard:profile' %}"><i class="sl sl-icon-user"></i> My Profile</a></li>
-          <li><a href="index_1.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+          <li><a href="{% url 'userauths:sign-out' %}"><i class="sl sl-icon-power"></i> Logout</a></li>
         </ul>
       </div>
     </div>  
