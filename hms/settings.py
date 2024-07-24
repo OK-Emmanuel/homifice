@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rigezp_&wp7=f+-ahv@6(p&i8c7u^5r7%e4%v7r&ny!$zx!(^0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [" * ", "localhost", "127.0.0.1"]
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 
@@ -159,7 +159,7 @@ JAZZMIN_SETTINGS = {
     "site_name": "Homifice",
     "site_header": "Homifice",
     "site_brand": "Edifying Homes",
-    "site_logo": "images\logo 2.png",
+    "site_logo": "images\logo2.png",
     "welcome_sign": "Welcome to the your_site_name",
     "copyright": "All Rights Reserved 2023 || Homifice",
 
