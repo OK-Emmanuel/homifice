@@ -18,6 +18,7 @@ Version: 1.0
 @import url("revolutionslider.css");
 
 /*Google Fonts*/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700,800");
 @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,600i,700,800&amp;subset=latin-ext');
 
@@ -117,25 +118,11 @@ Global Vars
 /*==========
   Typography
 ============*/
-.cinzel-decorative-regular {
-	font-family: "Cinzel Decorative", serif;
-	font-weight: 400;
-	font-style: normal;
-  }
-  
-  .cinzel-decorative-bold {
-	font-family: "Cinzel Decorative", serif;
-	font-weight: 700;
-	font-style: normal;
-  }
-  
-  .cinzel-decorative-black {
-	font-family: "Cinzel Decorative", serif;
-	font-weight: 900;
-	font-style: normal;
-  }
 
-  
+.dm-sans {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+}
 body {
 	color: #707070;
 	font-size: 15px;
@@ -151,7 +138,7 @@ body p {
 	background-color: #fff;
 }
 body, h1, h2, h3, h4, h5, h6, input[type="text"], input[type="password"], input[type="email"], textarea, select, input[type="button"], input[type="submit"], button, #tiptip_content, .map-box p, .map-box div, .numerical-rating .utf_counter_star_rating, body .nav_responsive i.menu-trigger:after {
-	font-family:'Nunito', sans-serif;
+	font-family:'DM Sans', sans-serif;
 	text-transform: none;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -8654,7 +8641,7 @@ span.like-icon {
     margin-bottom: 12px;
 }
 .section-heading .utf_sec_title_item {
-	font-family:'Nunito', sans-serif;
+	font-family:'DM Sans', sans-serif;
     font-size: 32px;
     color: #ffffff;
     font-weight: 600;

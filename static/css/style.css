@@ -9,7 +9,7 @@ body p {
 	line-height: 28px;
 }
 body, h1, h2, h3, h4, h5, h6, input[type="text"], input[type="password"], input[type="email"], textarea, select, input[type="button"], input[type="submit"], button, #tiptip_content, .map-box p, .map-box div, .numerical-rating .utf_counter_star_rating, body .nav_responsive i.menu-trigger:after {
-	font-family:'Nunito', sans-serif;
+	font-family:'DM Sans', sans-serif;
 	text-transform: none;
 }
 h1, h2, h3, h4, h5, h6 {

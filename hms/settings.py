@@ -158,15 +158,15 @@ LOGOUT_REDIRECT_URL = "userauths:sign-in"
 
 # Jazzmin Config
 JAZZMIN_SETTINGS = {
-    "site_title": "Homifice",
+    "site_title": "Admin Panel | Homifice",
     "site_name": "Homifice",
     "site_header": "Homifice",
-    "site_brand": "Edifying Homes",
-    "site_logo": "images\logo2.png",
-    "welcome_sign": "Welcome to the your_site_name",
-    "copyright": "All Rights Reserved 2023 || Homifice",
+    "site_brand": "Homifice",
+    "site_logo": "images/favicon.png",
+    "welcome_sign": "Welcome to Homifice",
+    # "copyright": "All Rights Reserved 2023 || Homifice",
 
-    # "site_icon": "images/favicon.png",
+    "site_icon": "images/favicon.png",
     # Add your own branding here
     # Copyright on the footer
     # "user_avatar": None,
@@ -178,7 +178,7 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         # Url that gets reversed (Permissions can be added)
         {"name": "Home", "url": "admin:index", "permissions": ["auth.view_user"]},
-        {"name": "Company", "url": "/admin/addons/company/"},
+        {"name": "Hotels", "url": "/admin/hotel/hotel/"},
         {"name": "Users", "url": "/admin/userauths/user/"},
         
         # model admin to link to (Permissions checked against model)
@@ -218,6 +218,10 @@ JAZZMIN_SETTINGS = {
         "hotel.BookingDetail": "fas fa-calendar-alt",
         "hotel.Guest": "fas fa-user",
         "hotel.Room": "fas fa-bed",
+        "hotel.hotelfaqs": "fas fa-question-circle",
+        "hotel.hotelfeatures": "fas fa-info-circle",
+        "hotel.hotelgallery":"fas fa-image",
+        "hotel.roomtype":"fas fa-bed",
         "hotel.RoomServices": "fas fa-user-cog",
         "hotel.Notification": "fas fa-bell",
         "hotel.Coupon": "fas fa-tag",
@@ -258,8 +262,8 @@ JAZZMIN_UI_TWEAKS = {
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-success",
-    "accent": "accent-teal",
+    "brand_colour": "navbar-warning",
+    "accent": "accent-orange",
     "navbar": "navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": False,
@@ -281,7 +285,7 @@ JAZZMIN_UI_TWEAKS = {
         "info": "btn-info",
         "warning": "btn-warning",
         "danger": "btn-danger",
-        "success": "btn-success",
+        "success": "btn-warning",
     },
 }
 
