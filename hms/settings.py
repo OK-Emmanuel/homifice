@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rigezp_&wp7=f+-ahv@6(p&i8c7u^5r7%e4%v7r&ny!$zx!(^0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://homifice.up.railway.app/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['homifice.up.railway.app', 'localhost', '127.0.0.1']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 
