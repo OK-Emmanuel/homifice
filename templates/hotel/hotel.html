@@ -3,16 +3,22 @@
 
 {% block content %}
 
-
+<style>
+  .headline{
+    
+    font-weight:900; 
+    text-shadow: rgba(255,255,255,1) 0px 0px 50px;
+  }
+</style>
 <!-- Banner -->
 <div class="search_container_block main_search_block" data-background-image="images/home_section_1.jpg">
   <div class="main_inner_search_block">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2 style="font-size: 100px; font-weight:900" class="dm-sans">HOMIFICE</h2>
-          <h2>Streamlining Operations for Hoteliers & Guests</h2>
-          <h4>Discover top rated hotels that bring out your royalty</h4>
+          <h2 class="dm-sans headline" style="font-size: 100px; ">HOMIFICE</h2>
+          <h2>Streamlining Operations for <br>Hoteliers & Guests</h2>
+          <h4></h4>
           </div>
       </div>
     </div>
@@ -36,7 +42,7 @@
                 <div class="utf_carousel_item">
                     <a href="{% url 'hotel:hotel_detail' hotel.slug %}" class="utf_listing_item-container compact">
                         <div class="utf_listing_item">
-                            <img src="{{hotel.image.url}}" alt="">
+                            <img src="{{hotel.image.url}}" width="400%" height="" alt="">
                             <span class="featured_tag">Featured</span>
                             <span class="utf_open_now">Open Now</span>
                             <div class="utf_listing_item_content">

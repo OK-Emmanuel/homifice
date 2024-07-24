@@ -9,13 +9,13 @@ Version: 1.0
 @charset "UTF-8";
 
 /*Bootstrap Css*/
-@import url("bootstrap-grid.css");
+@import url("bootstrap-grid.654fa1d84295.css");
 
 /*Icons*/
-@import url("icons.css");
+@import url("icons.f637a0c5ae08.css");
 
 /*Revolutionslider Css*/
-@import url("revolutionslider.css");
+@import url("revolutionslider.a86df61cde81.css");
 
 /*Google Fonts*/
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
@@ -732,7 +732,7 @@ body #navigation ul ul {
     width: 100%;
     height: 100%;
     display: inline-block;
-    background: url(../images/footer-bg.png) no-repeat;
+    background: url("../images/footer-bg.a1e8265d20ef.png") no-repeat;
 	background-size: cover;
 }
 .footer-shadow {
@@ -7480,8 +7480,8 @@ body .style-2 .ui-accordion .ui-accordion-header, body .style-2 .trigger a { tex
 }
 @font-face {
 	font-family: 'fontello';
-	src: url('../fonts/fontello.eot');
-	src: url('../fonts/fontello.eot') format('embedded-opentype'), url('../fonts/fontello.woff') format('woff'), url('../fonts/fontello.ttf') format('truetype'), url('../fonts/fontello.svg') format('svg');
+	src: url("../fonts/fontello.439783c49121.eot");
+	src: url("../fonts/fontello.439783c49121.eot") format('embedded-opentype'), url("../fonts/fontello.9fa4825f8b1b.woff") format('woff'), url("../fonts/fontello.3b7d6a220809.ttf") format('truetype'), url("../fonts/fontello.a500a902f818.svg") format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -9032,7 +9032,7 @@ span.like-icon {
 	position: relative;
     padding-top: 60px;
     padding-bottom: 60px;
-    background-image: url(../images/page-title.jpg);
+    background-image: url("../images/page-title.185bdd3b8cc9.jpg");
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -9151,7 +9151,7 @@ span.like-icon {
 	position: relative;
     padding-top: 20px;
     padding-bottom: 10px;
-    background-image: url(../images/error-page-bg.jpg);
+    background-image: url("../images/error-page-bg.819f95dacba8.jpg");
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -13532,7 +13532,7 @@ img.mfp-img {
     width: 100%;
     height: 100%;
     display: inline-block;
-    background:#f9f9f9 url(../images/testimonial.png) no-repeat;
+    background:#f9f9f9 url("../images/testimonial.b7a4c31a26b0.png") no-repeat;
 	background-size: contain;
 }
 .slick-arrow.slick-hidden {

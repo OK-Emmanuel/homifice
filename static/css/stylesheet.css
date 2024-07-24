@@ -134,6 +134,10 @@ body p {
 	line-height: 30px;
 	font-weight:400;
 }
+*::selection{
+	background-color: var(--color-main);	
+	color: white;
+}
 #main_wrapper {
 	background-color: #fff;
 }
@@ -149,6 +153,7 @@ h1.white, h2.white, h3.white, h4.white, h5.white, h6.white {
 }
 h2.headline_part, h3.headline_part {
 	font-size: 28px;
+	color: var(--color-main);
 	line-height: 40px;
 	margin: 0 0 30px 0;
 	font-weight: 700;
@@ -430,7 +435,7 @@ header.fullwidth_block .container {
 	transition: 0.3s;
 }
 .header-one .search_container_block:before {
-	background: rgba(42,14, 2, 0.8)
+	background: rgba(4, 0, 14, 0.8)
 }
 
 /*==========
@@ -14847,8 +14852,8 @@ button.panel-cancel:active {
     height: 100%;
     left: 0;
     top: 0;
-    background: -webkit-linear-gradient(45deg,rgba(245,84,142,.9) 0,rgba(144,58,249,.9) 100%);
-    background: -ms-linear-gradient(45deg,rgba(245,84,142,.9) 0,rgba(144,58,249,.9) 100%);
+    background: -webkit-linear-gradient(45deg,rgba(255, 142, 50, .9) 0,rgba(255,0,0,.9) 100%);
+    background: -ms-linear-gradient(45deg,rgba(255,84,142,.9) 0,rgba(144,58,249,.9) 100%);
     visibility: hidden;
     opacity: 0;
     -webkit-transition: all .5s ease 0;
@@ -17668,7 +17673,7 @@ a.social_bt {
 }
 .category_container_item_part a .featured {
 	color: #fff;
-    background-color: #F12C15;
+    background-color: var(--color-main);
     font-size: 13px;
     font-weight: 600;
     line-height: 18px;
